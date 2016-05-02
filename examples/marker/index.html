@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 90%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hello Marker</h1>
+    <div id="map"></div>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfZzzVpSnxwj1WctlXfbL2odiQjCS8CGI&callback=initMap" async defer></script>
+    <script src="marker.js" async defer></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!--    MAPMAP -->
+    <script>
+        // WayPoint - https://developers.google.com/maps/documentation/directions/intro#Waypoints
+        var myLatlng = new google.maps.LatLng(42.359824, -71.05981249999999);
+        var mapOptions = {
+            zoom: 14,
+            center: myLatlng
+        };
+        map = new google.maps.Map(document.getElementById("map"), mapOptions);
+        // https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|via:Lexington,MA
+        $.getJSON("/examples/marker/direction.json", function (data) {
+            //alert(data["routes"][0]["legs"][0]["steps"]);
+            var steps = data["routes"][0]["legs"][0]["steps"]
+
+            for (i = 0; i < 8; i++) {
+                lat = steps[i]["start_location"]["lat"];
+                lng = steps[i]["start_location"]["lng"];
+                instruct = steps[i]["html_instructions"];
+                console.log(steps[i]["start_location"]);
+                latlng = new google.maps.LatLng(lat, lng);
+                marker = new google.maps.Marker({
+                    position: latlng,
+                    title: instruct
+                });
+
+                // To add the marker to the map, call setMap();
+                marker.setMap(map);
+                myMarker.push(marker);
+            }
+        });
+        //var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    </script>
+</body>
+
+</html>
