@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<!--https://developers.google.com/maps/documentation/javascript/examples/directions-complex-->
+<!--https://developers.google.com/maps/documentation/javascript/examples/directions-draggable-->
 
 <head>
     <title>Simple Map</title>
@@ -12,15 +14,22 @@
             margin: 0;
             padding: 0;
         }
-
+        
         #map {
-            height: 90%;
+            margin: 10px;
+            height: 100%;
         }
     </style>
 </head>
 
 <body>
     <h1>Hello Marker</h1>
+    <p>เขื่อนรัชชประภา ChIJxZCK1Ww2UTARWjZkqRtgG9U</p>
+    <p>น้ำตกแม่ยาย ChIJZSiqf5AnUTARu1bbmbP5AWQ</p>
+    <p>อนุสรณ์สถานซึนามิ ChIJQ6LzEBfpUDARXvLry3DVeLE</p>
+    <p>บ้านบ่อดาน ChIJkxVO_JhZUDARTq6oR24BENM</p>
+    <p>อุทยานสิรินาถ ChIJNfeRDC1GUDARcmFVvmQ7SbY</p>
+    <p>แดรีฮัทพังงา ChIJ46BgJPcAUTARq9y0orc9txw</p>
     <div id="map"></div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfZzzVpSnxwj1WctlXfbL2odiQjCS8CGI&callback=initMap" async defer></script>
     <script src="marker.js" async defer></script>
@@ -29,7 +38,7 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <!--    MAPMAP -->
-    <script>
+    <script defer>
         // WayPoint - https://developers.google.com/maps/documentation/directions/intro#Waypoints
         var myLatlng = new google.maps.LatLng(42.359824, -71.05981249999999);
         var mapOptions = {
@@ -38,7 +47,7 @@
         };
         map = new google.maps.Map(document.getElementById("map"), mapOptions);
         // https://maps.googleapis.com/maps/api/directions/json?origin=Boston,MA&destination=Concord,MA&waypoints=Charlestown,MA|via:Lexington,MA
-        $.getJSON("/examples/marker/direction.json", function (data) {
+        $.getJSON("/marker/direction.json", function (data) {
             //alert(data["routes"][0]["legs"][0]["steps"]);
             var steps = data["routes"][0]["legs"][0]["steps"]
 
